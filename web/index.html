@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CyberShield AI — Digital Safety Assistant</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <span class="brand-mark">🛡️</span>
+      CyberShield AI
+    </div>
+    <nav class="tabs">
+      <button data-view="home" class="active">Home</button>
+      <button data-view="analyzer">Analyzer</button>
+      <button data-view="results">Results</button>
+      <button data-view="how">How It Works</button>
+      <button data-view="about">About</button>
+    </nav>
+  </div>
+</header>
+
+<main class="shell">
+
+  <!-- ============================= HOME ============================= -->
+  <section id="view-home" class="view active">
+    <div class="hero">
+      <span class="eyebrow"><span class="pulse-dot"></span> Real-time risk analysis</span>
+      <h1>Stay One Step Ahead of <span class="accent-word">Digital Scams</span></h1>
+      <p class="sub">CyberShield AI analyzes suspicious messages and links, explains the risks in plain language, and helps you decide what to do next.</p>
+      <button class="btn btn-primary" data-goto="analyzer">Analyze Something →</button>
+    </div>
+
+    <div class="section-title">What it checks</div>
+    <div class="feature-grid">
+      <div class="card feature-card">
+        <div class="icon">📩</div>
+        <h3>Message Analyzer</h3>
+        <p>Paste an SMS, WhatsApp message, or email. CyberShield AI checks for urgency, threats, credential requests, and impersonation.</p>
+      </div>
+      <div class="card feature-card">
+        <div class="icon">🔗</div>
+        <h3>URL Analyzer</h3>
+        <p>Enter a link to check its structure for phishing red flags — without ever visiting it.</p>
+      </div>
+      <div class="card feature-card">
+        <div class="icon">🧭</div>
+        <h3>Explain Like I'm 15</h3>
+        <p>Every result comes with a plain-language explanation, plus a technical breakdown if you want the details.</p>
+      </div>
+    </div>
+
+    <div class="section-title">Supported analysis types</div>
+    <div class="feature-grid">
+      <div class="card feature-card">
+        <div class="icon">✅</div>
+        <h3>Messages &amp; Emails</h3>
+        <p>SMS, WhatsApp, email text, social media DMs, payment notifications.</p>
+      </div>
+      <div class="card feature-card">
+        <div class="icon">✅</div>
+        <h3>URLs &amp; Links</h3>
+        <p>Any web address — checked for structural phishing indicators.</p>
+      </div>
+      <div class="card feature-card">
+        <div class="icon">🧪</div>
+        <h3>Transparent Scoring</h3>
+        <p>Every risk score is a sum of clearly labeled, explainable indicators — never a random guess.</p>
+      </div>
+    </div>
+
+    <div class="disclaimer">
+      <strong>Safety note:</strong> CyberShield AI provides risk assessment and educational guidance. It does not guarantee that a website, message, or sender is safe or malicious. Always verify sensitive requests through official channels.
+    </div>
+  </section>
+
+  <!-- ============================ ANALYZER =========================== -->
+  <section id="view-analyzer" class="view">
+    <div class="page-header">
+      <h1>Analyzer</h1>
+      <p>Choose what you'd like to check, then paste the content below.</p>
+    </div>
+
+    <div class="type-selector">
+      <button class="type-btn active" data-type="message">
+        <span class="type-icon">📩</span>
+        Message
+      </button>
+      <button class="type-btn" data-type="url">
+        <span class="type-icon">🔗</span>
+        URL
+      </button>
+    </div>
+
+    <div>
+      <textarea id="content-input" rows="7" placeholder="Paste the suspicious message here, e.g. 'Your bank account will be blocked today. Verify your account immediately by clicking this link.'"></textarea>
+      <div class="analyzer-actions">
+        <span class="char-count"><span id="char-count">0</span> / <span id="char-max">5000</span></span>
+        <button class="btn btn-primary" id="analyze-btn">Analyze →</button>
+      </div>
+      <div class="error-banner" id="error-banner"></div>
+    </div>
+  </section>
+
+  <!-- ============================ RESULTS ============================ -->
+  <section id="view-results" class="view">
+    <div id="results-empty" class="empty-results">
+      <p>No analysis yet. Head to the Analyzer to check a message or URL.</p>
+      <button class="btn btn-secondary" data-goto="analyzer">Go to Analyzer</button>
+    </div>
+
+    <div id="results-content" style="display:none;">
+      <div class="card results-header">
+        <div class="risk-ring-wrap">
+          <div class="risk-ring-scan"></div>
+          <svg width="128" height="128" viewBox="0 0 128 128">
+            <circle class="risk-ring-bg" cx="64" cy="64" r="56"></circle>
+            <circle class="risk-ring-fg" id="risk-ring-fg" cx="64" cy="64" r="56"
+                    stroke-dasharray="351.86" stroke-dashoffset="351.86"></circle>
+          </svg>
+          <div class="risk-ring-value">
+            <span class="num" id="risk-score-num">0</span>
+            <span class="denom">/ 100</span>
+          </div>
+        </div>
+        <div class="results-meta">
+          <span class="risk-badge" id="risk-badge">LOW</span>
+          <h2 id="risk-category">No clear threat detected</h2>
+          <span class="confidence">Confidence: <span id="risk-confidence">LOW</span></span>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="card">
+          <div class="section-title">Why is this suspicious?</div>
+          <ul class="indicator-list" id="indicator-list"></ul>
+        </div>
+        <div class="card">
+          <div class="section-title">What should you do?</div>
+          <ul class="action-list" id="avoid-list"></ul>
+          <ul class="action-list" id="do-list"></ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="explanation-tabs">
+          <button class="active" data-tab="simple">Simple Explanation</button>
+          <button data-tab="technical">Technical Analysis</button>
+        </div>
+        <div class="explanation-body" id="explanation-body"></div>
+        <div class="ai-note">
+          <span class="label">Contextual Analysis</span>
+          <span id="ai-note-text"></span>
+        </div>
+      </div>
+
+      <div class="results-footer-actions">
+        <button class="btn btn-primary" data-goto="analyzer" id="analyze-another">Analyze Another</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================== HOW IT WORKS ========================= -->
+  <section id="view-how" class="view">
+    <div class="page-header">
+      <h1>How It Works</h1>
+      <p>CyberShield AI combines rule-based security analysis with contextual reasoning — never relying on a single point of failure.</p>
+    </div>
+    <div class="card">
+      <ul class="flow-list">
+        <li>
+          <div>
+            <h4>You submit content</h4>
+            <p>Paste a suspicious message or URL into the Analyzer.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h4>The security engine scans for indicators</h4>
+            <p>Known manipulation tactics (urgency, credential requests, impersonation) and URL structure red flags are checked against a transparent rule set.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h4>Contextual analysis adds interpretation</h4>
+            <p>A reasoning layer explains which tactics were combined and why that pattern matters — and stays available even if not a single external service is reachable.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h4>The risk engine combines every signal</h4>
+            <p>Each detected indicator contributes a fixed, visible weight to a 0–100 score. Nothing is randomized.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h4>CyberShield generates an explanation</h4>
+            <p>You get both a plain-language summary and a technical breakdown of exactly what was detected.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h4>You receive a recommended action</h4>
+            <p>Clear next steps — what to avoid, and what to do instead — matched to the risk level.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================== ABOUT ============================= -->
+  <section id="view-about" class="view">
+    <div class="page-header">
+      <h1>About CyberShield AI</h1>
+    </div>
+
+    <div class="about-block">
+      <h3>The problem</h3>
+      <p>Phishing and scam messages are designed to exploit urgency and trust faster than most people can stop and think. Non-technical users are often left to decide, alone and under pressure, whether a message is safe.</p>
+    </div>
+    <div class="about-block">
+      <h3>The solution</h3>
+      <p>CyberShield AI gives anyone a fast, explainable second opinion — a transparent risk score, plain-language reasoning, and a clear recommended action, all in seconds.</p>
+    </div>
+    <div class="about-block">
+      <h3>Target users</h3>
+      <p>Anyone who receives messages or links they're unsure about — especially people without a cybersecurity background.</p>
+    </div>
+    <div class="about-block">
+      <h3>Technology</h3>
+      <p>Built entirely on each language's standard library — no third-party frameworks, packages, or SDKs — to keep the project transparent, dependency-free, and easy to audit end to end.</p>
+    </div>
+    <div class="about-block">
+      <h3>Responsible AI approach</h3>
+      <p>CyberShield AI never claims certainty it doesn't have. Every score is explainable, every URL verdict uses cautious language, and the system always remains useful even if any single component is unavailable.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  CyberShield AI — Built for BYAMN Buildathon 2026. Educational risk assessment only — not a guarantee of safety.
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
