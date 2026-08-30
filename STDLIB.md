@@ -15,9 +15,9 @@ this project, and which common third-party dependency it replaces.
 | `http.server` | `main.py` | Serves static web files and handles the `/api/analyze` endpoint | Flask, FastAPI, Express |
 | `socketserver` | `main.py` | Provides the TCP server that `http.server` runs on | uvicorn / gunicorn (app server) |
 | `json` | `main.py` | Parses incoming request bodies and serializes API responses | — (json is stdlib, no replacement needed, but frameworks like Flask often wrap it) |
-| `urllib.parse` | `main.py`, `url_analyzer.py` | Parses URLs into scheme/host/path components; parses query strings from request paths | `requests` (for URL parsing utilities), `tldextract` |
+| `urllib.parse` | `main.py`, `url_analyzer.py` | Parses URLs into scheme/host/path components and handles URL components | `tldextract` or other third-party URL utilities |
 | `re` | `analyzer.py`, `url_analyzer.py` | Regex matching to find embedded URLs in messages and detect suspicious character patterns | — (re is stdlib) |
-| `os` | `main.py` | Reads the `PORT` environment variable and resolves the web directory path | `python-dotenv` |
+| `os` | `main.py` | Reads the `PORT` environment variable and resolves the web directory path | No third-party dependency required |
 | `unittest` | `tests/*.py` | Test framework: test discovery, assertions, test runner | `pytest` |
 | `sys` | `tests/*.py` | Adjusts `sys.path` so tests can import project modules without installation/packaging | `pytest` (auto path handling), `setuptools` (editable installs) |
 
