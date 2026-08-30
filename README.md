@@ -104,9 +104,11 @@ Every result exposes its own reasoning: the `contributing_indicators` list retur
 | `web/` | Static frontend — `index.html`, `style.css`, `app.js` |
 | `tests/` | `unittest`-based tests for the analysis and scoring modules |
 
-## Project Structure
+## 📁 Project Structure
 
+```text
 CyberShield/
+│
 ├── main.py
 ├── analyzer.py
 ├── url_analyzer.py
@@ -114,20 +116,24 @@ CyberShield/
 ├── ai_analyzer.py
 ├── explainer.py
 ├── config.py
+│
 ├── web/
 │   ├── index.html
 │   ├── style.css
 │   └── app.js
+│
 ├── tests/
 │   ├── test_analyzer.py
 │   ├── test_url_analyzer.py
 │   └── test_threat_detector.py
+│
 ├── README.md
 ├── STDLIB.md
 ├── requirements.txt
 ├── .env.example
 ├── .gitignore
 └── LICENSE
+```
 
 ## Zero-Dependency Engineering
 
