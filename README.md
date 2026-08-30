@@ -38,18 +38,20 @@ CyberShield runs submitted content through two independent rule-based analyzers 
 
 ## How It Works
 
-User submits content (message or URL) via the browser UI
-↓
-analyzer.py / url_analyzer.py — rule-based detection
-↓
-threat_detector.py — combines indicators into one score
-↓
-ai_analyzer.py — contextual note over already-detected indicators
-↓
-explainer.py — plain-language + technical explanation, recommended actions
-↓
-main.py returns the combined JSON result; the browser renders it
+```
 
+User submits content (message or URL) via the browser UI
+        ↓
+analyzer.py / url_analyzer.py — rule-based detection
+        ↓
+threat_detector.py — combines indicators into one score
+        ↓
+ai_analyzer.py — contextual note over already-detected indicators
+        ↓
+explainer.py — plain-language + technical explanation, recommended actions
+        ↓
+main.py returns the combined JSON result; the browser renders it
+```
 
 ## Detection Pipeline
 
@@ -109,20 +111,19 @@ CyberShield/
 ├── explainer.py
 ├── config.py
 ├── web/
-│ ├── index.html
-│ ├── style.css
-│ └── app.js
+│   ├── index.html
+│   ├── style.css
+│   └── app.js
 ├── tests/
-│ ├── test_analyzer.py
-│ ├── test_url_analyzer.py
-│ └── test_threat_detector.py
+│   ├── test_analyzer.py
+│   ├── test_url_analyzer.py
+│   └── test_threat_detector.py
 ├── README.md
 ├── STDLIB.md
 ├── requirements.txt
 ├── .env.example
 ├── .gitignore
 └── LICENSE
-
 
 ## Zero-Dependency Engineering
 
@@ -215,3 +216,4 @@ The suite covers `analyzer.py`, `url_analyzer.py`, and `threat_detector.py`: nor
 ## License
 
 MIT License — see [LICENSE](LICENSE).
+```
