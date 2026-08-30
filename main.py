@@ -156,7 +156,7 @@ class CyberShieldHandler(http.server.SimpleHTTPRequestHandler):
 
 def main():
     with socketserver.TCPServer(("0.0.0.0", PORT), CyberShieldHandler) as httpd:
-        print(f"CyberShield AI running at http://localhost:{PORT}")
+        print(f"CyberShield running at http://localhost:{PORT}")
         print("Press Ctrl+C to stop.")
         try:
             httpd.serve_forever()
