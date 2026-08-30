@@ -1,12 +1,16 @@
-# CyberShield
+# 🛡️ CyberShield
 
-A zero-dependency web application that analyzes suspicious messages and URLs for phishing, scam, and social-engineering indicators, and returns an explainable risk score together with the specific reasoning behind it.
+### Detect. Explain. Decide. — Without the Dependency Stack.
 
-CyberShield does not use machine learning, an external API, or any third-party runtime package. Every check is a deterministic, auditable rule implemented in Python's standard library and served through plain, browser-native HTML, CSS, and JavaScript.
+CyberShield is an explainable phishing, scam, and social-engineering risk analyzer designed to help people make safer decisions when confronted with suspicious messages and URLs.
 
-Built for the **Zero Dependency | 72-Hour Hackathon** (Hackathon Raptors).
+Instead of returning a black-box **“Safe” or “Unsafe”** verdict, CyberShield analyzes observable threat indicators, calculates a transparent risk score, identifies the evidence behind that score, and translates the findings into clear, actionable guidance.
 
----
+> **Engineered under the constraints of the Zero Dependency | 72-Hour Hackathon by Hackathon Raptors.**
+
+The core security analysis is built entirely with **Python's standard library** and browser-native technologies — no third-party runtime packages, no external threat-intelligence APIs, and no machine-learning model.
+
+**The result: a lightweight, reproducible, auditable security analysis pipeline where every decision can be traced back to an explicit rule.**
 
 ## Overview
 
@@ -129,7 +133,7 @@ CyberShield/
 
 `requirements.txt` is empty, and no file in this project imports a third-party package — every backend import resolves to the Python standard library (`http.server`, `socketserver`, `json`, `urllib.parse`, `re`, `os`, `unittest`, `sys`), and the frontend uses only native browser APIs (`fetch`, DOM methods, CSS custom properties) with no build step, no CDN scripts, and no external fonts.
 
-The constraint shaped the architecture directly rather than being worked around: `http.server` stands in for a framework like Flask or FastAPI, `urllib.parse` replaces URL-parsing utilities a package like `requests` or `tldextract` would normally provide, and `unittest` replaces `pytest` for the test suite. The scoring logic is deliberately kept as plain, additive arithmetic over labeled indicators, which needs nothing beyond what the standard library already provides.
+The constraint shaped the architecture directly rather than being worked around: `http.server` provides the web-server functionality without a third-party framework, `urllib.parse` provides the URL-parsing primitives required by CyberShield, and `unittest` provides the test framework without requiring `pytest`.
 
 **`ai_analyzer.py` note:** despite the filename, this module makes no network calls, requires no API key, and imports nothing beyond what's already in the standard library. It is a deterministic function that maps combinations of already-detected indicators to a pre-written explanatory sentence — it does not call a language model, and it is not machine learning. It exists to fulfill a contextual-reasoning role while remaining fully offline and dependency-free; it is not presented here as "AI-powered" in the sense of using a trained model.
 
